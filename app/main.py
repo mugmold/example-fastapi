@@ -11,9 +11,7 @@ from app.core.db import engine
 
 app = FastAPI()
 
-origins = [
-    'https://www.google.com',
-]
+origins = ['*']
 
 app.add_middleware(
     CORSMiddleware,
