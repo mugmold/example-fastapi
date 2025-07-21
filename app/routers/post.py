@@ -25,7 +25,7 @@ def format_post_response(result_tuple):
     return response_data
 
 
-@router.get("/", response_model=List[PostResponse])
+@router.get("", response_model=List[PostResponse])
 def get_all_posts(db: Session = Depends(get_db), limit: int = 10, skip: int = 0, search: Optional[str] = ""):
     base_query = db.query(
         post_model, func.count(vote_model.post_id).label("total_votes")
@@ -69,7 +69,7 @@ def get_my_posts(db: Session = Depends(get_db), current_user: user_model = Depen
     return [format_post_response(post) for post in posts]
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=PostResponse)
+@router.post("", status_code=status.HTTP_201_CREATED, response_model=PostResponse)
 def create_post(post: PostCreate, db: Session = Depends(get_db), current_user: user_model = Depends(get_current_user)):
     new_post = post_model(user_id=current_user.id, **post.model_dump())
     db.add(new_post)

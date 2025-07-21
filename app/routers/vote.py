@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=VoteResponse)
+@router.post("", status_code=status.HTTP_201_CREATED, response_model=VoteResponse)
 def create_vote(vote: VoteCreate, db: Session = Depends(get_db), current_user: user_model = Depends(get_current_user)):
 
     post = db.query(post_model).filter(post_model.id == vote.post_id).first()
@@ -50,7 +50,7 @@ def create_vote(vote: VoteCreate, db: Session = Depends(get_db), current_user: u
     }
 
 
-@router.delete("/", status_code=status.HTTP_200_OK, response_model=VoteResponse)
+@router.delete("", status_code=status.HTTP_200_OK, response_model=VoteResponse)
 def delete_vote(vote: VoteCreate, db: Session = Depends(get_db), current_user: user_model = Depends(get_current_user)):
     post = db.query(post_model).filter(post_model.id == vote.post_id).first()
 

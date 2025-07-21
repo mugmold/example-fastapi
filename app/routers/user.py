@@ -15,7 +15,7 @@ router = APIRouter(
 )
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=UserCreateResponse)
+@router.post("", status_code=status.HTTP_201_CREATED, response_model=UserCreateResponse)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
     if len(user.password) < 8:
@@ -47,7 +47,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
         )
 
 
-@router.get("/", status_code=status.HTTP_200_OK, response_model=List[UserResponse])
+@router.get("", status_code=status.HTTP_200_OK, response_model=List[UserResponse])
 def get_users(db: Session = Depends(get_db)):
     query = db.query(user_model)
     users = query.all()
