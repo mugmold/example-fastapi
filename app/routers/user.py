@@ -17,7 +17,7 @@ router = APIRouter(
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=UserCreateResponse)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
-
+    print("--- FUNGSI CREATE_USER DIPANGGIL ---")
     if len(user.password) < 8:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -49,6 +49,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
 @router.get("/", status_code=status.HTTP_200_OK, response_model=List[UserResponse])
 def get_users(db: Session = Depends(get_db)):
+    print("--- FUNGSI GET_USERS DIPANGGIL ---")
     query = db.query(user_model)
     users = query.all()
     return users
