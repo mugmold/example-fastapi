@@ -27,21 +27,9 @@ app.include_router(auth.router)
 app.include_router(vote.router)
 
 
-# test debug bentar di prod (anjir kawkawk)
-
-from sqlalchemy import text
-from sqlalchemy.orm import Session
-from fastapi import Depends
-from app.core.db import get_db
-
 @app.get("/")
-def root(db: Session = Depends(get_db)):
-    db_url = str(db.bind.url)
-    db_version = db.execute(text("SELECT version()")).scalar()
-    return {
-        "Connected To": db_url,
-        "DB Version": db_version
-    }
+def root():
+    return {"message": "hello world!"}
 
 
 # @app.exception_handler(status.HTTP_404_NOT_FOUND)
